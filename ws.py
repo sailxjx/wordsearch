@@ -8,7 +8,6 @@ class WordSearch:
     __wrap = False
     __n = 0  # n rows
     __m = 0  # m letters
-    __p = 0  # p == words count
     __start = []  # the start point
 
     def __init__(self, filePath):
@@ -41,7 +40,6 @@ class WordSearch:
         self.__grid = grid
         self.__n = n
         self.__m = m
-        self.__p = p
         self.__pwords = pwords
 
     def __findWords(self, word):
@@ -53,10 +51,11 @@ class WordSearch:
                     if end is False:
                         continue
                     else:
-                        x = x - self.__n if x >= self.__n else x  # be sure the letter index is in grid
-                        y = y - self.__m if y >= self.__m else y
-                        end[0] = end[0] - self.__n if end[0] >= self.__n else end[0]
-                        end[1] = end[1] - self.__m if end[1] >= self.__m else end[1]
+                        if self.__wrap:
+                            x = x - self.__n if x >= self.__n else x  # be sure the letter index is in grid
+                            y = y - self.__m if y >= self.__m else y
+                            end[0] = end[0] - self.__n if end[0] >= self.__n else end[0]
+                            end[1] = end[1] - self.__m if end[1] >= self.__m else end[1]
                         print (x, y), (end[0], end[1])
                         return True  # break while find the word in grid
         print 'NOT FOUND'
