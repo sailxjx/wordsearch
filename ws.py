@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
+import sys
 
-class WordSearch:
+
+class WordSearch(object):
     filePath = None
     __grid = []
     __pwords = []
@@ -56,7 +58,7 @@ class WordSearch:
                             y = y - self.__m if y >= self.__m else y
                             end[0] = end[0] - self.__n if end[0] >= self.__n else end[0]
                             end[1] = end[1] - self.__m if end[1] >= self.__m else end[1]
-                        print (x, y), (end[0], end[1])
+                        print '(%s,%s) (%s,%s)' % (x, y, end[0], end[1])
                         return True  # break while find the word in grid
         print 'NOT FOUND'
         return False
@@ -98,7 +100,7 @@ class WordSearch:
         except IndexError:
             return False
 
-filePath = 'input_wrap.txt'
+filePath = 'input_wrap.txt' if len(sys.argv) < 2 else sys.argv[1]
 ws = WordSearch(filePath)
 if __name__ == '__main__':
     ws.run()

@@ -45,7 +45,7 @@ class WordSearch
               if y >= @m then y -= @m
               if end[0] >= @n then end[0] -= @n
               if end[1] >= @m then end[1] -= @m
-            console.log "(#{x}, #{y}) (#{end[0]}, #{end[1]})"
+            console.log "(#{x},#{y}) (#{end[0]},#{end[1]})"
             return true
     console.log 'NOT FOUND'
     return false
@@ -82,6 +82,6 @@ class WordSearch
       return @dirCompare(x, y, direction, word, i + 1)
     return false
 
-filePath = 'input_wrap.txt'
+filePath = if process.argv[2]? then process.argv[2] else 'input_wrap.txt'
 ws = new WordSearch(filePath)
 ws.run()
