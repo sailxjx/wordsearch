@@ -37,19 +37,31 @@ class WordSearch
       for y in [0...@grid[x].length]
         if @grid[x][y] == word[0]
           end = @inGrid(x, y, word)
+          if end == false
+            continue
+          else
+            if @wrap
+              if x >= @n then x -= @n
+              if y >= @m then y -= @m
+              if end[0] >= @n then end[0] -= @n
+              if end[1] >= @m then end[1] -= @m
+            console.log "(#{x}, #{y}) (#{end[0]}, #{end[1]})"
+            return true
+    console.log 'NOT FOUND'
+    return false
   inGrid: (x, y, word)->
     @start = [x, y]
     directions = [
-      [0, -1],   # top
-      [1, -1],   # right top
-      [1, 0],    # right
-      [1, 1],    # right bottom
-      [0, 1],    # bottom
-      [-1, 1],   # left bottom
-      [-1, 0],   # left
-      [-1, -1]   # left top
+      [0, -1],   # left
+      [1, -1],   # bottomleft
+      [1, 0],    # bottom
+      [1, 1],    # bottomright
+      [0, 1],    # right
+      [-1, 1],   # topright
+      [-1, 0],   # top
+      [-1, -1]   # topleft
     ]
-    for directions in directions
+    for direction in directions
       end = @dirCompare(x, y, direction, word)
       if end == false then continue else return end
     return false
@@ -58,8 +70,17 @@ class WordSearch
       return [x, y]
     x += direction[0]
     y += direction[1]
-    if (x - @start[0]) % @n == 0 || (y - @start[1]) % @m == 0
+    # multiplied by the ratio to determine the boundary
+    if @wrap == true then ratio = 2 else ratio = 1
+    # out of array index
+    if x < 0 || y < 0 || x >= @n * ratio || y >= @m * ratio
       return false
+    # letter repeated
+    if (x - @start[0]) % @n == 0 && (y - @start[1]) % @m == 0
+      return false
+    if @grid[x][y] == word[i]
+      return @dirCompare(x, y, direction, word, i + 1)
+    return false
 
 filePath = 'input_wrap.txt'
 ws = new WordSearch(filePath)
