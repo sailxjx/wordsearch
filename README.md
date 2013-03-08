@@ -1,17 +1,17 @@
-super word search
+#Super Word Search
 
-###language versions (order by completion time):
+###Language versions (order by completion time):
 
 * python
 * coffee
 * ruby
 * php
 
-###test script: 
+###Test script: 
 
 * wstest.sh
 
-###examples:
+###Examples:
 ```
 # without input file path
 bash$ ./ws.rb
