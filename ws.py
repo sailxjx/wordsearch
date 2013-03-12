@@ -65,16 +65,13 @@ class WordSearch(object):
 
     def __inGrid(self, x, y, word):  # whether the word is in 8 directions of the grid; return the end point
         self.__start = [x, y]
-        directions = [
-            (0, -1),   # left
-            (1, -1),   # bottomleft
-            (1, 0),    # bottom
-            (1, 1),    # bottomright
-            (0, 1),    # right
-            (-1, 1),   # topright
-            (-1, 0),   # top
-            (-1, -1)   # topleft
-        ]
+        directions = []
+        for n in xrange(-1, 2):
+            for m in xrange(-1, 2):
+                if [n, m] == [0, 0]:
+                    continue
+                else:
+                    directions.append([n, m])
         for direction in directions:
             end = self.__dirCompare(x, y, direction, word)
             if end is False:

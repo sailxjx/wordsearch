@@ -71,16 +71,15 @@ class WordSearch {
             $x,
             $y
         );
-        $directions = array(
-            array(0, -1),
-            array(1, -1),
-            array(1, 0),
-            array(1, 1),
-            array(0, 1),
-            array(-1, 1),
-            array(-1, 0),
-            array(-1, -1)
-        );
+        foreach (array(-1, 0, 1) as $n) {
+            foreach (array(-1, 0, 1) as $m) {
+                if ($n == 0 && $m == 0) {
+                    continue;
+                }else{
+                    $directions[] = array($n, $m);
+                }
+            }
+        }
         foreach ($directions as $direction) {
             $end = $this->dirCompare($x, $y, $direction, $word);
             if ($end != false) {

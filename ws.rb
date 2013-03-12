@@ -60,16 +60,16 @@ class WordSearch
 
   def inGrid(x, y, word)
     @start = [x, y]
-    directions = [
-      [0, -1],   # left
-      [1, -1],   # bottomleft
-      [1, 0],    # bottom
-      [1, 1],    # bottomright
-      [0, 1],    # right
-      [-1, 1],   # topright
-      [-1, 0],   # top
-      [-1, -1]   # topleft
-    ]
+    directions = []
+    (-1..1).each do |n|
+      (-1..1).each do |m|
+        if [n, m] == [0, 0]
+          next
+        else
+          directions.push [n, m]
+        end
+      end
+    end
     directions.each do |d|
       endPoint = dirCompare(x, y, d, word)
       if endPoint == false then next else return endPoint end

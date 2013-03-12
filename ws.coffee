@@ -51,16 +51,13 @@ class WordSearch
     return false
   inGrid: (x, y, word)->
     @start = [x, y]
-    directions = [
-      [0, -1],   # left
-      [1, -1],   # bottomleft
-      [1, 0],    # bottom
-      [1, 1],    # bottomright
-      [0, 1],    # right
-      [-1, 1],   # topright
-      [-1, 0],   # top
-      [-1, -1]   # topleft
-    ]
+    directions = []
+    for n in [-1..1]
+      for m in [-1..1]
+        if [n, m] == [0, 0]
+          continue
+        else
+          directions.push [n, m]
     for direction in directions
       end = @dirCompare(x, y, direction, word)
       if end == false then continue else return end
