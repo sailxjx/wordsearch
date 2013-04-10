@@ -35,6 +35,8 @@ function do_test() {
         fi
     done
     output_info "$1 test finish: $SUCC_NUM success, $ERROR_NUM error"
+    [[ $ERROR_NUM > 0 ]] && exit 1
+    exit 0
 }
 
 # begin

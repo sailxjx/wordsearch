@@ -1,0 +1,6 @@
+language: bash
+branches:
+  only:
+    - 'master'
+script:
+  - bash wstest.sh
